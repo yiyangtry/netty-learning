@@ -33,21 +33,27 @@ public class EchoServer {
 
     public void start() throws Exception {
         EventLoopGroup group = new NioEventLoopGroup();
+        EchoServerHandler serverHandler = new EchoServerHandler();
         try {
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
-                    .channel(NioServerSocketChannel.class)
-                    .localAddress(new InetSocketAddress(port))
+                    .channel(NioServerSocketChannel.class) // 指定所使用的 NIO 传输 Channel
+                    .localAddress(new InetSocketAddress(port)) // 使用指定的端口设置套接字地址
+                    // 添加一个EchoServerHandler到子Channel的 ChannelPipeline
+                    // 它的作用是待客户端SocketChannel建立连接后，执行initChannel以便添加更多的处理器
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        public void initChannel(SocketChannel ch) throws Exception {
-                            ch.pipeline().addLast(new EchoServerHandler());
+                        public void initChannel(SocketChannel ch) {
+                            ch.pipeline().addLast(serverHandler);
                         }
                     });
+            // 异步绑定服务器 调用 sync()方法阻阻塞等待直到绑定完成
             // 实际项目中，b.bind().sync()可以省略
             ChannelFuture f = b.bind().sync();
             System.out.println(EchoServer.class.getName() +
                     " started and listening for connections on " + f.channel().localAddress());
+
+            // 获取 Channel 的CloseFuture，并且阻塞当前线 程直到它完成
             // 实际项目中，f.channel().closeFuture().sync()可以省略
             f.channel().closeFuture().sync();
         } finally {
