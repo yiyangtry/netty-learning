@@ -13,6 +13,10 @@
         <module>netty-in-action</module>
         <module>netty-rpc</module>
         <module>netty-small-demo</module>
+        <module>hdlc-test</module>
+        <module>netty-1-nio</module>
+        <module>netty-2-rumen</module>
+        <module>netty-3-jinjie</module>
     </modules>
 
     <dependencyManagement>
