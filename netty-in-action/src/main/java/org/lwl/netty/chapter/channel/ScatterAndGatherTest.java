@@ -20,7 +20,7 @@ public class ScatterAndGatherTest {
             FileOutputStream fos = new FileOutputStream("data03.txt");
             FileChannel osChannel = fos.getChannel();
             // 3.定义多个缓冲区做数据分散
-            ByteBuffer buffer1 = ByteBuffer.allocate(6);
+            ByteBuffer buffer1 = ByteBuffer.allocate(3);
             ByteBuffer buffer2 = ByteBuffer.allocate(1024);
             ByteBuffer[] buffers = {buffer1, buffer2};
             // 4.从通道中读取数据分散到各个缓冲区
