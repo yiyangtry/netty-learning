@@ -7,9 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * @author thinking_fioa
- * @createTime 2018/5/14
- * @description BIO 服务端例子, 代码清单 1-1 阻塞I/O示例
+ * 连续接受一个客户端的消息
  */
 public class Server {
 

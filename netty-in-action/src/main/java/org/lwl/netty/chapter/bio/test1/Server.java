@@ -20,21 +20,19 @@ public class Server {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+        // 1.定义一个ServerSocket对象进行服务端的端口注册
         ServerSocket ss = new ServerSocket(8888);
-        try {
-            System.out.println("启动服务器");
-            Socket s = ss.accept();
-            System.out.println("客户端:" + s.getInetAddress().getLocalHost() + "已连接到服务器");
+        System.out.println("启动服务器");
+        // 2.监听客户端的Socket连接请求
+        Socket socket = ss.accept();
+        System.out.println("客户端:" + socket.getInetAddress().getLocalHost() + "已连接到服务器");
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            String msg;
-            if ((msg = br.readLine()) != null) {
-                System.out.println("服务端收到消息" + msg);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        InputStream inputStream = socket.getInputStream();
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+        BufferedReader br = new BufferedReader(inputStreamReader);
+        String msg;
+        if ((msg = br.readLine()) != null) {
+            System.out.println("服务端收到消息" + msg);
         }
     }
-
 }

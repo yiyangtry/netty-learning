@@ -6,12 +6,8 @@ import java.net.Socket;
 import java.util.Scanner;
 
 /**
- * @author thinking_fioa
- * @createTime 2018/5/14
- * @description BIO 服务端例子, 代码清单 1-1 阻塞I/O示例
+ * 连续给服务端发送消息
  */
-
-
 public class Client {
 
     public static void main(String[] args) {
@@ -28,7 +24,6 @@ public class Client {
                 printStream.println(msg);
                 printStream.flush();
             }
-
 
 //            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(os));
 //

@@ -1,4 +1,4 @@
-package org.lwl.netty.chapter.bio.test3;
+package org.lwl.netty.chapter.bio;
 
 import java.io.*;
 import java.net.ServerSocket;
