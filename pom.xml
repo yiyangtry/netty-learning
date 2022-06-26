@@ -17,6 +17,7 @@
         <module>netty-1-nio</module>
         <module>netty-2-rumen</module>
         <module>netty-3-jinjie</module>
+        <module>netty-demo</module>
     </modules>
 
     <dependencyManagement>
