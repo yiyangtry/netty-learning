@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * 非阻塞IO
  * @author yiyang
  * @date 2022/6/24 22:40
  */
@@ -19,10 +20,9 @@ import java.util.List;
 public class ServerNoBlock {
 
     public static void main(String[] args) throws IOException {
-        // 使用 nio 来理解阻塞模式, 单线程
         // 0. ByteBuffer
         ByteBuffer buffer = ByteBuffer.allocate(16);
-        // 1. 创建了服务器
+        // 1. 创建服务器
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 
         // 设置为非阻塞模式
@@ -36,7 +36,7 @@ public class ServerNoBlock {
         while (true) {
             // 4. accept 建立与客户端连接， SocketChannel 用来与客户端之间通信
             // log.debug("connecting...");
-            SocketChannel socketChannel = serverSocketChannel.accept(); // 阻塞方法，线程停止运行  如果没有建立连接，sc为null
+            SocketChannel socketChannel = serverSocketChannel.accept(); // 如果没有建立连接，sc为null
             if (socketChannel != null) {
                 log.debug("connected... {}", socketChannel);
                 socketChannel.configureBlocking(false); // 非阻塞模式
